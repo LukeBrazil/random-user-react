@@ -1,16 +1,23 @@
-import React, { Component } from 'react';
+import React from "react";
 import "./RandomUser.css";
 
-
-class RandomUser extends Component {
-    render() {
-        return (
-            <div className='user-card'>
-                <img src={this.props.userData.picture.large} alt=''></img>
-                <p>{this.props.userData.name.first}  {this.props.userData.name.last}</p>
-            </div>
-        )
-    }
-}
+const RandomUser = (props) => {
+  const { userData } = props;
+    return (
+      <ul>
+          {userData.map(user => (
+                      <li className="user-card">
+                      <img
+                        src={user.picture.medium}
+                        alt={`${user.name.first} ${user.name.last}`}
+                      />
+                      <p>
+                        {user.name.first} {user.name.last}
+                      </p>
+                    </li>
+          ))}
+      </ul>
+    );
+};
 
 export default RandomUser;

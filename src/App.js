@@ -1,22 +1,40 @@
-import React, { Component } from 'react';
-import RandomUser from './components/RandomUser';
-import UserData from './UserData';
-import './App.css';
+import React, { Component } from "react";
+import RandomUser from "./components/RandomUser";
+import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {UserData: UserData}
+  state = {
+    userData: [],
+  };
+
+  loadData = async () => {
+    const response = await fetch("https://randomuser.me/api/?results=10");
+    const data = await response.json();
+    return data;
+  };
+
+  async componentDidMount() {
+    const userData = await this.loadData();
+
+    this.setState({
+      userData: userData.results,
+    });
   }
-  render () {
+
+  render() {
+    const { userData } = this.state;
     return (
-    <div className="App">
-      <header className="App-header">
-       <h1>Random User</h1>
-      </header>
-      <RandomUser userData={this.state.UserData.results[0]}/>
-    </div>
-  )
+      <div className="App">
+        <header className="App-header">
+          <h1>Random User</h1>
+        </header>
+        {this.state.userData.length ? (
+          <RandomUser userData={userData} />
+        ) : (
+          <p>No User Data Loaded!</p>
+        )}
+      </div>
+    );
   }
 }
 
