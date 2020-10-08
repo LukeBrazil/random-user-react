@@ -6,7 +6,8 @@ class RandomUser extends Component {
     render() {
         return (
             <div className='user-card'>
-                <p>Random User</p>
+                <img src={this.props.userData.picture.large} alt=''></img>
+                <p>{this.props.userData.name.first}  {this.props.userData.name.last}</p>
             </div>
         )
     }

@@ -14,7 +14,7 @@ class App extends Component {
       <header className="App-header">
        <h1>Random User</h1>
       </header>
-      <RandomUser />
+      <RandomUser userData={this.state.UserData.results[0]}/>
     </div>
   )
   }
